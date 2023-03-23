@@ -40,9 +40,10 @@ body {
   grid-template-areas: 
     'one two three four'
     'five six seven eight'
-    'nine ten eleven twelve'
+    'nine ten eleven eight'
     'thirteen fourteen fifteen sixteen'
-    'seventeen eighteen fifteen sixteen';
+    'seventeen eighteen ninteen sixteen';
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   flex: 1;
   gap: 10px;
 }
@@ -59,6 +60,8 @@ body {
   border-radius: 10px;
 }
 
+
+
 #equalBtn {
   background: #AFD275;
   color: #0F292F;
@@ -66,5 +69,53 @@ body {
 }
 
 #addBtn {
+  grid-area: eight;
+}
+
+button:nth-child(1) {
+  grid-area: eighteen;
+}
+
+button:nth-child(2) {
+  grid-area: thirteen;
+}
+
+button:nth-child(3) {
+  grid-area: fourteen;
+}
+
+button:nth-child(4) {
   grid-area: fifteen;
+}
+
+button:nth-child(5) {
+  grid-area: nine;
+}
+
+button:nth-child(6) {
+  grid-area: ten;
+}
+
+button:nth-child(7) {
+  grid-area: eleven;
+}
+
+button:nth-child(8) {
+  grid-area: five;
+}
+
+button:nth-child(9) {
+  grid-area: six;
+}
+
+button:nth-child(10) {
+  grid-area: seven;
+}
+
+button:nth-child(11) {
+  grid-area: seventeen;
+}
+
+button:nth-child(17) {
+  grid-area: ninteen;
 }
