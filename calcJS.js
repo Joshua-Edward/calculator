@@ -20,14 +20,13 @@ const divide = function(a, b) {
 };
 
 //Variables and operate function to be run when = is clicked
-let aValue = '';
-let operatorSelection = '';
-let bValue = '';
+let aValue = 30;
+let operatorSelection = 'add';
+let bValue = 5;
 
-const operate = function(aValue, bValue) {
-  const aOperation = aValue;
-  const bOperation = bValue;
-  console.log(typeof(operatorSelection));
+const operate = function() {
+  const aOperation = Number(aValue);
+  const bOperation = Number(bValue);
   if (operatorSelection === 'add') {
     return add(aOperation,bOperation);
   } else if (operatorSelection === 'subtract') {
@@ -35,7 +34,14 @@ const operate = function(aValue, bValue) {
   } else if (operatorSelection === 'multiply') {
     return multiply(aOperation,bOperation);
   } else if (operatorSelection === 'divide') {
-    return divide(aOperation,bOperation);
+    if (bOperation !== 0) {
+      return divide(aOperation,bOperation);
+    } else {
+      alert("You cannot divide by zero.");
+      aValue = 0;
+      operatorSelection = '';
+      bValue = 0;
+    };
   };
 };
 
@@ -71,7 +77,7 @@ sevenBtn.addEventListener('click', appendNum);
 eightBtn.addEventListener('click', appendNum);
 nineBtn.addEventListener('click', appendNum);
 decimalBtn.addEventListener('click', appendDecimal);
-equalBtn.addEventListener('click', operate);
+equalBtn.addEventListener('click', equalKeyOperation);
 addBtn.addEventListener('click', setOperator);
 subtractBtn.addEventListener('click', setOperator);
 multiplyBtn.addEventListener('click', setOperator);
@@ -79,8 +85,13 @@ divideBtn.addEventListener('click', setOperator);
 delBtn.addEventListener('click', deleteLastNum);
 clearBtn.addEventListener('click', calcReset);
 
+// button functions
 function appendNum(e) {
-  bValue = bValue + e.target.value
+  if (bValue === 0) {
+    bValue = e.target.value;
+  } else {
+  bValue = bValue + e.target.value;
+};
   console.log(bValue);
 };
 
@@ -91,18 +102,31 @@ function appendDecimal(e) {
 };
 
 function setOperator(e) {
+  if (bValue !== 0) {
+    aValue = operate();
+    bValue = 0;
+    operatorSelection = '';
+  };
   operatorSelection = e.target.value;
-
+  console.log(aValue);
+  console.log(operatorSelection);
+  console.log(bValue);
 };
 
-function deleteLastNum(e) {
+function deleteLastNum() {
   if (bValue.length !== 0) {
     bValue = bValue.slice(0, -1);
   }
 };
 
-function calcReset(e) {
-  aValue = '';
+function calcReset() {
+  aValue = 0;
   operatorSelection = '';
-  bValue = '';
+  bValue = 0;
+};
+
+function equalKeyOperation() {
+  aValue = operate();
+  bValue = 0;
+  operatorSelection = '';
 };
