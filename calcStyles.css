@@ -62,13 +62,13 @@ body {
 
 
 
-#equalBtn {
+#equal {
   background: #AFD275;
   color: #0F292F;
   grid-area: sixteen;
 }
 
-#addBtn {
+#add {
   grid-area: eight;
 }
 
