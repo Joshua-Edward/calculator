@@ -59,7 +59,37 @@ const divideBtn = document.getElementById('divide');
 const delBtn = document.getElementById('del');
 const clearBtn = document.getElementById('clear');
 
+// Adding listeners to buttons
+zeroBtn.addEventListener('click', appendNum);
+oneBtn.addEventListener('click', appendNum);
+twoBtn.addEventListener('click', appendNum);
+threeBtn.addEventListener('click', appendNum);
+fourBtn.addEventListener('click', appendNum);
+fiveBtn.addEventListener('click', appendNum);
+sixBtn.addEventListener('click', appendNum);
+sevenBtn.addEventListener('click', appendNum);
+eightBtn.addEventListener('click', appendNum);
+nineBtn.addEventListener('click', appendNum);
+decimalBtn.addEventListener('click', appendDecimal);
+equalBtn.addEventListener('click', operate);
+addBtn.addEventListener('click', operatorSelect);
+subtractBtn.addEventListener('click', operatorSelect);
+multiplyBtn.addEventListener('click', operatorSelect);
+divideBtn.addEventListener('click', operatorSelect);
+delBtn.addEventListener('click', deleteLastNum);
+clearBtn.addEventListener('click', calcReset);
 
-// typeSwitcherBtn.addEventListener('click', switcherBtnChange);
-// function switcherBtnChange(e) {
-// }
+function appendNum(e) {
+}
+
+function appendDecimal(e) {
+}
+
+function operatorSelect(e) {
+}
+
+function deleteLastNum(e) {
+}
+
+function calcReset(e) {
+}
