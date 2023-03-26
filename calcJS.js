@@ -20,9 +20,9 @@ const divide = function(a, b) {
 };
 
 //Variables and operate function to be run when = is clicked
-let aValue = 0;
-let operatorSelection = 'add';
-let bValue = 0;
+let aValue = '';
+let operatorSelection = '';
+let bValue = '';
 
 const operate = function(aValue, bValue) {
   const aOperation = aValue;
@@ -72,24 +72,37 @@ eightBtn.addEventListener('click', appendNum);
 nineBtn.addEventListener('click', appendNum);
 decimalBtn.addEventListener('click', appendDecimal);
 equalBtn.addEventListener('click', operate);
-addBtn.addEventListener('click', operatorSelect);
-subtractBtn.addEventListener('click', operatorSelect);
-multiplyBtn.addEventListener('click', operatorSelect);
-divideBtn.addEventListener('click', operatorSelect);
+addBtn.addEventListener('click', setOperator);
+subtractBtn.addEventListener('click', setOperator);
+multiplyBtn.addEventListener('click', setOperator);
+divideBtn.addEventListener('click', setOperator);
 delBtn.addEventListener('click', deleteLastNum);
 clearBtn.addEventListener('click', calcReset);
 
 function appendNum(e) {
-}
+  bValue = bValue + e.target.value
+  console.log(bValue);
+};
 
 function appendDecimal(e) {
-}
+  if (bValue.includes(".") == false) {
+    bValue = bValue + e.target.value
+  };
+};
 
-function operatorSelect(e) {
-}
+function setOperator(e) {
+  operatorSelection = e.target.value;
+
+};
 
 function deleteLastNum(e) {
-}
+  if (bValue.length !== 0) {
+    bValue = bValue.slice(0, -1);
+  }
+};
 
 function calcReset(e) {
-}
+  aValue = '';
+  operatorSelection = '';
+  bValue = '';
+};
