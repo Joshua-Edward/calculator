@@ -27,7 +27,9 @@ let bValue = 0;
 const operate = function() {
   const aOperation = Number(aValue);
   const bOperation = Number(bValue);
-  if (operatorSelection === 'add') {
+  if (operatorSelection === '') {
+    return bOperation;
+  } else if (operatorSelection === 'add') {
     return add(aOperation,bOperation);
   } else if (operatorSelection === 'subtract') {
     return subtract(aOperation,bOperation);
@@ -98,8 +100,8 @@ function appendNum(e) {
 };
 
 function appendDecimal(e) {
-  if (bValue.includes(".") == false) {
-    bValue = bValue + e.target.value
+  if (bValue.toString().includes(".") == false) {
+    bValue = bValue + e.target.value;
     displayUpdater();
   };
 };
@@ -111,7 +113,7 @@ function setOperator(e) {
   };
 
   if (bValue !== 0) {
-    aValue = Number(operate());
+    aValue = operate();
     bValue = 0;
     operatorSelection = '';
     displayUpdater();
@@ -124,7 +126,9 @@ function setOperator(e) {
 };
 
 function deleteLastNum() {
-  if (bValue.length !== 0) {
+  if (typeof bValue == 'number') {
+    bValue = 0;
+  } else if (bValue.length !== 0 & bValue !== 0) {
     bValue = bValue.slice(0, -1);
   };
   displayUpdater();
@@ -132,26 +136,38 @@ function deleteLastNum() {
 
 function calcReset() {
   aValue = 0;
-  const currentDisplay = `${operatorSelection}Display`;
-  document.getElementById(currentDisplay).classList.toggle("activeDisplay");
+  if (operatorSelection !== '') {
+    const currentDisplay = `${operatorSelection}Display`;
+    document.getElementById(currentDisplay).classList.toggle("activeDisplay");
+  };
   operatorSelection = '';
   bValue = 0;
   displayUpdater();
 };
 
 function equalKeyOperation() {
-  aValue = Number(operate());
-  bValue = 0;
-  operatorSelection = '';
-  displayUpdater();
+  if (operatorSelection === '') {
+    alert('Please select a math symbol')
+  } else {
+    aValue = operate();
+    bValue = 0;
+    const currentDisplay = `${operatorSelection}Display`;
+    document.getElementById(currentDisplay).classList.toggle("activeDisplay");
+    operatorSelection = '';
+    displayUpdater();
+  };
 };
 
 function displayUpdater() {
-  console.log(typeof aValue);
-  console.log(typeof bValue);
-  // topDisplay.innerHTML = (aValue ? aValue : 0);
-  topDisplay.innerHTML = aValue;
-  bottomDisplay.innerHTML = bValue;
-  console.log(typeof aValue);
-  console.log(typeof bValue);
+  const ReGex = /\.\d\d\d\d/;
+  const aValueDisplay = aValue.toString();
+  console.log(typeof aValueDisplay);
+  const bValueDisplay = bValue.toString();
+  console.log(typeof aValueDisplay);
+  if (ReGex.test(aValueDisplay)) {
+    topDisplay.innerHTML = Number(aValueDisplay).toFixed(3);
+  } else {
+    topDisplay.innerHTML = aValueDisplay;
+  };
+  bottomDisplay.innerHTML = bValueDisplay;
 };
