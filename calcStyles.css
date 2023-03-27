@@ -64,7 +64,7 @@ body {
   opacity: 30%;
 }
 
-#addDisplay {
+.activeDisplay {
   border: solid black 2px;
   opacity: 100%;
 }

@@ -20,9 +20,9 @@ const divide = function(a, b) {
 };
 
 //Variables and operate function to be run when = is clicked
-let aValue = 30;
-let operatorSelection = 'add';
-let bValue = 5;
+let aValue = 0;
+let operatorSelection = '';
+let bValue = 0;
 
 const operate = function() {
   const aOperation = Number(aValue);
@@ -38,7 +38,6 @@ const operate = function() {
       return divide(aOperation,bOperation);
     } else {
       alert("You cannot divide by zero.");
-      aValue = 0;
       operatorSelection = '';
       bValue = 0;
     };
@@ -64,6 +63,9 @@ const multiplyBtn = document.getElementById('multiply');
 const divideBtn = document.getElementById('divide');
 const delBtn = document.getElementById('del');
 const clearBtn = document.getElementById('clear');
+const topDisplay = document.getElementById('aValueDisplay');
+const bottomDisplay = document.getElementById('bValueDisplay');
+
 
 // Adding listeners to buttons
 zeroBtn.addEventListener('click', appendNum);
@@ -88,45 +90,68 @@ clearBtn.addEventListener('click', calcReset);
 // button functions
 function appendNum(e) {
   if (bValue === 0) {
-    bValue = e.target.value;
+    bValue = Number(e.target.value);
   } else {
-  bValue = bValue + e.target.value;
-};
-  console.log(bValue);
+    bValue = bValue + e.target.value;
+  };
+  displayUpdater();
 };
 
 function appendDecimal(e) {
   if (bValue.includes(".") == false) {
     bValue = bValue + e.target.value
+    displayUpdater();
   };
 };
 
 function setOperator(e) {
+  if (operatorSelection !== '') {
+    const currentDisplay = `${operatorSelection}Display`;
+    document.getElementById(currentDisplay).classList.toggle("activeDisplay");
+  };
+
   if (bValue !== 0) {
-    aValue = operate();
+    aValue = Number(operate());
     bValue = 0;
     operatorSelection = '';
+    displayUpdater();
   };
+
   operatorSelection = e.target.value;
-  console.log(aValue);
-  console.log(operatorSelection);
-  console.log(bValue);
+
+  const newDisplay = `${operatorSelection}Display`;
+  document.getElementById(newDisplay).classList.toggle("activeDisplay");
 };
 
 function deleteLastNum() {
   if (bValue.length !== 0) {
     bValue = bValue.slice(0, -1);
-  }
+  };
+  displayUpdater();
 };
 
 function calcReset() {
   aValue = 0;
+  const currentDisplay = `${operatorSelection}Display`;
+  document.getElementById(currentDisplay).classList.toggle("activeDisplay");
   operatorSelection = '';
   bValue = 0;
+  displayUpdater();
 };
 
 function equalKeyOperation() {
-  aValue = operate();
+  aValue = Number(operate());
   bValue = 0;
   operatorSelection = '';
+  displayUpdater();
+};
+
+function displayUpdater() {
+  console.log(typeof aValue);
+  console.log(typeof bValue);
+  // topDisplay.innerHTML = (aValue ? aValue : 0);
+  topDisplay.innerHTML = aValue;
+  bottomDisplay.innerHTML = bValue;
+  console.log(typeof aValue);
+  console.log(typeof bValue);
 };
