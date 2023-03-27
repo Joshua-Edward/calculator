@@ -126,10 +126,12 @@ function setOperator(e) {
 };
 
 function deleteLastNum() {
-  if (typeof bValue == 'number') {
+  if (bValue === 0) {
     bValue = 0;
-  } else if (bValue.length !== 0 & bValue !== 0) {
+  } else if (bValue.length > 1) {
     bValue = bValue.slice(0, -1);
+  } else {
+    bValue = 0;
   };
   displayUpdater();
 };
@@ -161,9 +163,7 @@ function equalKeyOperation() {
 function displayUpdater() {
   const ReGex = /\.\d\d\d\d/;
   const aValueDisplay = aValue.toString();
-  console.log(typeof aValueDisplay);
   const bValueDisplay = bValue.toString();
-  console.log(typeof aValueDisplay);
   if (ReGex.test(aValueDisplay)) {
     topDisplay.innerHTML = Number(aValueDisplay).toFixed(3);
   } else {
