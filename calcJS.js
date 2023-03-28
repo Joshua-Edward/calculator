@@ -1,4 +1,10 @@
-//Math functions
+// Globals used to track and pass the previous and current 
+// values for the math functions
+let aValue = 0;
+let operatorSelection = '';
+let bValue = 0;
+
+// Math functions
 const add = function(a, b) {
 	const addTotal = a + b;
   return addTotal;
@@ -19,11 +25,7 @@ const divide = function(a, b) {
   return divideTotal;
 };
 
-//Variables and operate function to be run when = is clicked
-let aValue = 0;
-let operatorSelection = '';
-let bValue = 0;
-
+// Operate function to be run when = is clicked
 const operate = function() {
   const aOperation = Number(aValue);
   const bOperation = Number(bValue);
@@ -89,16 +91,14 @@ divideBtn.addEventListener('click', setOperator);
 delBtn.addEventListener('click', deleteLastNum);
 clearBtn.addEventListener('click', calcReset);
 
-// button functions
+// Adds new digit to number when number buttons are clicked
 function appendNum(e) {
-  if (bValue === 0) {
-    bValue = Number(e.target.value);
-  } else {
-    bValue = bValue + e.target.value;
-  };
+  bValue = bValue === 0 ? Number(e.target.value) 
+    : bValue + e.target.value;
   displayUpdater();
 };
 
+// Add decimal to number when clicked
 function appendDecimal(e) {
   if (bValue.toString().includes(".") == false) {
     bValue = bValue + e.target.value;
@@ -106,10 +106,11 @@ function appendDecimal(e) {
   };
 };
 
+// Sets wether add, subtract, multiply, or divide 
+// operator will be used
 function setOperator(e) {
   if (operatorSelection !== '') {
-    const currentDisplay = `${operatorSelection}Display`;
-    document.getElementById(currentDisplay).classList.toggle("activeDisplay");
+    operatorDisplay();
   };
 
   if (bValue !== 0) {
@@ -120,54 +121,54 @@ function setOperator(e) {
   };
 
   operatorSelection = e.target.value;
-
-  const newDisplay = `${operatorSelection}Display`;
-  document.getElementById(newDisplay).classList.toggle("activeDisplay");
+  operatorDisplay();
 };
 
+// Deletes the last number of the input
 function deleteLastNum() {
-  if (bValue === 0) {
-    bValue = 0;
-  } else if (bValue.length > 1) {
-    bValue = bValue.slice(0, -1);
-  } else {
-    bValue = 0;
-  };
+  bValue = bValue.length > 1 ? bValue.slice(0, -1) : 0;
   displayUpdater();
 };
 
+// Resets all variables and operators of the calculator to 
+// the default
 function calcReset() {
   aValue = 0;
   if (operatorSelection !== '') {
-    const currentDisplay = `${operatorSelection}Display`;
-    document.getElementById(currentDisplay).classList.toggle("activeDisplay");
+    operatorDisplay();
   };
   operatorSelection = '';
   bValue = 0;
   displayUpdater();
 };
 
+// Runs the equaltion and resets what is needed when hitting 
+// the equal button
 function equalKeyOperation() {
   if (operatorSelection === '') {
     alert('Please select a math symbol')
   } else {
     aValue = operate();
     bValue = 0;
-    const currentDisplay = `${operatorSelection}Display`;
-    document.getElementById(currentDisplay).classList.toggle("activeDisplay");
+    operatorDisplay();
     operatorSelection = '';
     displayUpdater();
   };
 };
 
+// Updates the displays as they change when called
 function displayUpdater() {
   const ReGex = /\.\d\d\d\d/;
   const aValueDisplay = aValue.toString();
   const bValueDisplay = bValue.toString();
-  if (ReGex.test(aValueDisplay)) {
-    topDisplay.innerHTML = Number(aValueDisplay).toFixed(3);
-  } else {
-    topDisplay.innerHTML = aValueDisplay;
-  };
+  topDisplay.innerHTML = ReGex.test(aValueDisplay) 
+    ? Number(aValueDisplay).toFixed(3) 
+    : aValueDisplay;
   bottomDisplay.innerHTML = bValueDisplay;
+};
+
+// Updates the symbols element styling for add, subtract, multiply, and divide
+function operatorDisplay() {
+  const currentDisplay = `${operatorSelection}Display`;
+  document.getElementById(currentDisplay).classList.toggle("activeDisplay");
 };
