@@ -72,11 +72,11 @@ body {
 #btnContainer {
   display: grid;
   grid-template-areas: 
-    'one two three four'
-    'five six seven eight'
-    'nine ten eleven eight'
-    'thirteen fourteen fifteen sixteen'
-    'seventeen eighteen ninteen sixteen';
+    'minus multi divide clear'
+    'seven eight nine plus'
+    'four five six plus'
+    'one two three equal'
+    'decimal zero del equal';
   grid-template-columns: 1fr 1fr 1fr 1fr;
   flex: 1;
   gap: 10px;
@@ -94,62 +94,78 @@ body {
   border-radius: 10px;
 }
 
-#equal {
-  background: #AFD275;
-  color: #0F292F;
-  grid-area: sixteen;
+#zero {
+  grid-area: zero;
 }
 
-#add {
-  grid-area: eight;
+#one {
+  grid-area: one;
 }
 
-button:nth-child(1) {
-  grid-area: eighteen;
+#two {
+  grid-area: two;
 }
 
-button:nth-child(2) {
-  grid-area: thirteen;
+#three {
+  grid-area: three;
 }
 
-button:nth-child(3) {
-  grid-area: fourteen;
+#four {
+  grid-area: four;
 }
 
-button:nth-child(4) {
-  grid-area: fifteen;
+#five {
+  grid-area:five;
 }
 
-button:nth-child(5) {
-  grid-area: nine;
-}
-
-button:nth-child(6) {
-  grid-area: ten;
-}
-
-button:nth-child(7) {
-  grid-area: eleven;
-}
-
-button:nth-child(8) {
-  grid-area: five;
-}
-
-button:nth-child(9) {
+#six {
   grid-area: six;
 }
 
-button:nth-child(10) {
+#seven {
   grid-area: seven;
 }
 
-button:nth-child(11) {
-  grid-area: seventeen;
+#eight {
+  grid-area: eight;
 }
 
-button:nth-child(17) {
-  grid-area: ninteen;
+#nine {
+  grid-area: nine;
+}
+
+#decimal {
+  grid-area: decimal;
+}
+
+#equal {
+  background: #AFD275;
+  color: #0F292F;
+  grid-area: equal;
+}
+
+#add {
+  grid-area: plus;
+}
+
+#subtract {
+  grid-area: minus;
+}
+
+#multiply {
+  grid-area: multi;
+}
+
+#divide {
+  grid-area: divide;
+}
+
+#del {
+  grid-area: del;
+}
+
+#clear {
+  grid-area: clear;
 }
 
 button {
